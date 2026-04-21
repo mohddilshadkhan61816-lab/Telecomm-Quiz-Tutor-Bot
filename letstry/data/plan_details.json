@@ -1,0 +1,71 @@
+{
+  "plan_details": [
+    {
+      "id": "plan_1",
+      "title": "Unlimited Talk & Text",
+      "content": "This plan offers unlimited voice calling and text messaging across the country with low monthly fees. It is ideal for customers who communicate frequently and need steady connectivity without data usage concerns.",
+      "keywords": ["voice", "text", "unlimited", "connectivity", "monthly fee"]
+    },
+    {
+      "id": "plan_2",
+      "title": "Premium Data Booster",
+      "content": "The Premium Data Booster adds a high-capacity data allowance to an existing service plan. It is designed for high-bandwidth users streaming video, video conferencing, and using mobile hotspots.",
+      "keywords": ["data", "high-capacity", "streaming", "hotspots", "video conferencing"]
+    },
+    {
+      "id": "plan_3",
+      "title": "Family Share Bundle",
+      "content": "Family Share Bundle lets up to five lines share a common pool of voice minutes, texts, and data. It includes parental controls, shared data alerts, and cost management tools to keep family telecom spend predictable.",
+      "keywords": ["shared", "family", "data pool", "parental controls", "cost management"]
+    },
+    {
+      "id": "plan_4",
+      "title": "International Roaming Pack",
+      "content": "This pack provides reduced roaming fees, international calling minutes, and local data access in multiple countries. It is best for business travelers or frequent international visitors needing consistent service abroad.",
+      "keywords": ["international", "roaming", "calling minutes", "travel", "abroad"]
+    },
+    {
+      "id": "plan_5",
+      "title": "IoT Device Connectivity",
+      "content": "IoT Device Connectivity supports sensor networks, smart meters, and industrial IoT devices with optimized low-power data plans. It focuses on reliability, device management, and secure network access for machine-to-machine communication.",
+      "keywords": ["IoT", "low-power", "device management", "machine-to-machine", "secure"]
+    }
+  ],
+  "quiz_questions": [
+    {
+      "id": "q1",
+      "question": "Which plan is best for a family that wants to share voice, text, and data across multiple lines?",
+      "options": ["Unlimited Talk & Text", "Premium Data Booster", "Family Share Bundle", "International Roaming Pack"],
+      "answer": "Family Share Bundle",
+      "explanation": "Family Share Bundle is designed for up to five lines to share voice, text, and data, making it the best option for families."
+    },
+    {
+      "id": "q2",
+      "question": "A customer needs mobile hotspot support and large monthly data for video conferences. Which plan should they choose?",
+      "options": ["Unlimited Talk & Text", "Premium Data Booster", "IoT Device Connectivity", "Family Share Bundle"],
+      "answer": "Premium Data Booster",
+      "explanation": "Premium Data Booster provides a high-capacity data allowance suitable for mobile hotspots and video conferencing."
+    },
+    {
+      "id": "q3",
+      "question": "What plan is optimized for sensor networks and low-power device communication?",
+      "options": ["International Roaming Pack", "IoT Device Connectivity", "Family Share Bundle", "Unlimited Talk & Text"],
+      "answer": "IoT Device Connectivity",
+      "explanation": "IoT Device Connectivity is tailored for IoT devices, focusing on low-power data plans and machine-to-machine communication."
+    },
+    {
+      "id": "q4",
+      "question": "Which plan should a frequent international traveler pick for reduced roaming fees and local data access abroad?",
+      "options": ["International Roaming Pack", "Premium Data Booster", "Family Share Bundle", "IoT Device Connectivity"],
+      "answer": "International Roaming Pack",
+      "explanation": "International Roaming Pack offers reduced roaming fees and local data access for travelers abroad."
+    },
+    {
+      "id": "q5",
+      "question": "If a subscriber mainly needs unlimited voice and text but no extra data, which plan is most appropriate?",
+      "options": ["Unlimited Talk & Text", "Family Share Bundle", "Premium Data Booster", "IoT Device Connectivity"],
+      "answer": "Unlimited Talk & Text",
+      "explanation": "Unlimited Talk & Text focuses on unlimited voice calling and messaging, making it ideal for users who do not need additional data."
+    }
+  ]
+}

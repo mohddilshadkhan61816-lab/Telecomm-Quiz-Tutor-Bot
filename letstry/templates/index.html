@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telecomm Quiz Tutor</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Telecomm Learning</p>
+          <h1>Quiz + Tutor Bot</h1>
+          <p class="hero-copy">
+            Answer questions about telecom plans, then get personalized feedback and context-based explanations.
+          </p>
+        </div>
+      </header>
+
+      <main class="card-grid">
+        <section class="card quiz-card">
+          <div class="question-header">
+            <span id="question-counter"></span>
+            <h2 id="question-text"></h2>
+          </div>
+
+          <form id="quiz-form">
+            <div id="options-container" class="options-list"></div>
+            <div class="answer-input">
+              <label for="answer-input">Your answer</label>
+              <input id="answer-input" name="answer" placeholder="Type your selected plan or concept..." />
+            </div>
+            <div class="button-row">
+              <button type="button" id="prev-question">Previous</button>
+              <button type="button" id="next-question">Next</button>
+              <button type="submit" id="submit-answer" class="primary">Submit Answer</button>
+            </div>
+          </form>
+
+          <div id="result-card" class="result-card hidden">
+            <h3>Evaluation</h3>
+            <p id="result-text"></p>
+            <div id="snippets" class="snippets"></div>
+          </div>
+        </section>
+
+        <section class="card info-card">
+          <h2>How it works</h2>
+          <ol>
+            <li>Choose the best answer from the telecom plan options.</li>
+            <li>Submit your answer, and the bot evaluates your response.</li>
+            <li>Receive a score, correct answer, and contextual learning notes.</li>
+          </ol>
+          <div class="info-box">
+            <strong>Run locally:</strong>
+            <code>python app.py</code>
+            <p>Then open <strong>http://127.0.0.1:5000</strong> in your browser.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const questions = JSON.parse('{{ questions|safe }}');
+      let currentIndex = 0;
+
+      const questionCounter = document.getElementById("question-counter");
+      const questionText = document.getElementById("question-text");
+      const optionsContainer = document.getElementById("options-container");
+      const answerInput = document.getElementById("answer-input");
+      const resultCard = document.getElementById("result-card");
+      const resultText = document.getElementById("result-text");
+      const snippets = document.getElementById("snippets");
+
+      function renderQuestion() {
+        const question = questions[currentIndex];
+        questionCounter.textContent = `Question ${currentIndex + 1} of ${questions.length}`;
+        questionText.textContent = question.question;
+        optionsContainer.innerHTML = question.options
+          .map(
+            (option, index) =>
+              `<button type="button" class="option-button" data-value="${option}">${index + 1}. ${option}</button>`
+          )
+          .join("");
+        answerInput.value = "";
+        resultCard.classList.add("hidden");
+      }
+
+      optionsContainer.addEventListener("click", (event) => {
+        const button = event.target.closest(".option-button");
+        if (!button) return;
+        answerInput.value = button.dataset.value;
+      });
+
+      document.getElementById("prev-question").addEventListener("click", () => {
+        currentIndex = Math.max(0, currentIndex - 1);
+        renderQuestion();
+      });
+
+      document.getElementById("next-question").addEventListener("click", () => {
+        currentIndex = Math.min(questions.length - 1, currentIndex + 1);
+        renderQuestion();
+      });
+
+      document.getElementById("quiz-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const question = questions[currentIndex];
+        const userAnswer = answerInput.value.trim();
+        if (!userAnswer) {
+          alert("Please enter an answer or choose an option.");
+          return;
+        }
+
+        const response = await fetch("/evaluate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question_id: question.id, user_answer: userAnswer }),
+        });
+
+        const data = await response.json();
+        if (data.error) {
+          resultText.textContent = data.error;
+          resultCard.classList.remove("hidden");
+          return;
+        }
+
+        resultText.textContent = data.evaluation;
+        snippets.innerHTML = data.snippet_cards
+          .map(
+            (item) =>
+              `<div class="snippet"><strong>${item.title}</strong><p>${item.content}</p></div>`
+          )
+          .join("");
+        resultCard.classList.remove("hidden");
+      });
+
+      renderQuestion();
+    </script>
+  </body>
+</html>
