@@ -1,1 +1,0 @@
-# Telecomm-Quiz-Tutor-Bot
